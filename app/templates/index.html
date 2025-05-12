@@ -1,25 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetCare a Domicilio - Cuidado Veterinario Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-    <header>
-        <nav class="container">
-            <a href="#" class="logo">VetCare</a>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+{% extends "base.html" %}
+
+{% block title %}VetCare a Domicilio - Cuidado Veterinario Profesional{% endblock %}
+
+{% block content %}
 
     <section class="hero" id="inicio">
         <div class="container">
@@ -27,10 +10,10 @@
                 <div class="hero-text">
                     <h1>Cuidado Veterinario en la Comodidad de tu Hogar</h1>
                     <p>Atención médica profesional para tus mascotas, sin el estrés del traslado. Servicio disponible las 24 horas, todos los días.</p>
-                    <a href="#contacto" class="btn btn-primary">Agenda una Cita</a>
+                    <a href="{{ url_for('contacts.contact_form') }}" class="btn btn-primary">Agenda una Cita</a>
                 </div>
                 <div class="hero-image">
-                    <img src="images/hero-image.jpg" alt="Veterinario acariciando un perro con cariño y profesionalismo" style="max-width: 100%; border-radius: 12px;">
+                    <img src="{{ url_for('static', filename='images/hero-image.jpg') }}" alt="Veterinario acariciando un perro con cariño y profesionalismo" style="max-width: 100%; border-radius: 12px;">
                 </div>
             </div>
         </div>
@@ -44,24 +27,27 @@
             </div>
             <div class="services-grid">
                 <div class="service-card">
-                    <img src="images/checkup.jpg" alt="Veterinario realizando chequeo general a una mascota" class="service-image">
+                    <img src="{{ url_for('static', filename='images/checkup.jpg') }}" alt="Veterinario realizando chequeo general a una mascota" class="service-image">
                     <div class="service-content">
                         <h3>Chequeo General</h3>
                         <p>Evaluamos de forma completa el estado de salud de tu mascota, directamente en la comodidad de tu hogar.</p>
+                        <a href="{{ url_for('payments.payment_form') }}" class="btn btn-primary">Agendar $30</a>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src="images/vaccine.jpg" alt="Veterinario aplicando vacuna a una mascota" class="service-image">
+                    <img src="{{ url_for('static', filename='images/vaccine.jpg') }}" alt="Veterinario aplicando vacuna a una mascota" class="service-image">
                     <div class="service-content">
                         <h3>Vacunación</h3>
                         <p>Mantenemos actualizado el esquema de vacunación de tu mascota con nuestro servicio a domicilio.</p>
+                        <a href="{{ url_for('payments.payment_form') }}" class="btn btn-primary">Agendar $25</a>
                     </div>
                 </div>
                 <div class="service-card">
-                    <img src="images/emergency.jpg" alt="Veterinario atendiendo una emergencia" class="service-image">
+                    <img src="{{ url_for('static', filename='images/emergency.jpg') }}" alt="Veterinario atendiendo una emergencia" class="service-image">
                     <div class="service-content">
                         <h3>Emergencias</h3>
                         <p>Brindamos atención inmediata ante cualquier emergencia veterinaria, en cualquier momento.</p>
+                        <a href="{{ url_for('contacts.contact_form') }}" class="btn btn-primary">Consultar</a>
                     </div>
                 </div>
             </div>
@@ -80,7 +66,7 @@
                         "El servicio es excelente. El veterinario fue muy profesional y cariñoso con mi mascota. La atención a domicilio hace toda la diferencia."
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/client1.jpg" alt="Cliente satisfecho con el servicio veterinario" class="author-image">
+                        <img src="{{ url_for('static', filename='images/client1.jpg') }}" alt="Cliente satisfecho con el servicio veterinario" class="author-image">
                         <div>
                             <h4>María González</h4>
                             <p>Dueña de Max</p>
@@ -92,7 +78,7 @@
                         "La atención a domicilio es perfecta, especialmente para gatos que se estresan con los traslados. Muy recomendado."
                     </div>
                     <div class="testimonial-author">
-                        <img src="images/client2.jpg" alt="Cliente recomendando el servicio veterinario" class="author-image">
+                        <img src="{{ url_for('static', filename='images/client2.jpg') }}" alt="Cliente recomendando el servicio veterinario" class="author-image">
                         <div>
                             <h4>Carlos Rodríguez</h4>
                             <p>Dueño de Luna</p>
@@ -148,6 +134,7 @@
                         <li><a href="#servicios">Servicios</a></li>
                         <li><a href="#testimonios">Testimonios</a></li>
                         <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="{{ url_for('admin') }}">Admin</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -157,7 +144,7 @@
                 </div>
             </div>
             <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-                <p>&copy; 2025 VetCare a Domicilio. Todos los derechos reservados.</p>
+                <p>&copy; {{ now.year }} VetCare a Domicilio. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -199,8 +186,9 @@
                             <ul>
                                 <li>Consultas generales</li>
                                 <li>Vacunación</li>
-                                <li>Emergencias 24/7</li>
-                                <li>Cirugías</li>
+                                <li>Emergencias</li>
+                                <li>Cirugías menores</li>
+                                <li>Tratamientos</li>
                             </ul>
                         </div>
                     </div>
@@ -212,19 +200,16 @@
                             <span class="arrow"></span>
                         </label>
                         <div class="faq-answer">
-                            <p>Puedes agendar tu cita a través de WhatsApp o llamando directamente a nuestro número.</p>
+                            <p>Puedes agendar una cita a través de:</p>
+                            <ul>
+                                <li>WhatsApp: +58 424-357-7054</li>
+                                <li>Email: Thelarez24@gmail.com</li>
+                                <li>Formulario de contacto en nuestra web</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <div class="chatbot-footer">
-                <p>¿No encontraste lo que buscabas?</p>
-                <a href="https://wa.me/584243577054" class="whatsapp-button" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Contáctanos
-                </a>
-            </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}
